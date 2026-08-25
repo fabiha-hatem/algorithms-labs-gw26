@@ -1,1 +1,2 @@
 print("Hello, this is my first python program for this class!")
+print("Trying to make a change")
