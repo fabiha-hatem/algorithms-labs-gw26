@@ -143,7 +143,7 @@ and the array state after each step. The first row is worked.
 |---|---|---|---|---|---|---|
 | 1 | 0 | 4 | `left=1` (10), `right=2` (8) | 1 | Swap `arr[0]` with `arr[1]` | `[10, 4, 8, 5, 1, 2, 7]` |
 | 2 | 1 | 4 | `left= 3` (5), `right= 4` (1) | 3 | Swap 4 and 5 | `[10,5,8,4,1,2,7]` |
-| 3 | TODO | TODO | TODO | TODO | TODO | TODO |
+| 3 | 2 | 8 | `left= 5` (2), `right= 6` (7) | 7 | Swap 4 and 7 | `[10,5,7,4,1,2,8]` |
 
 ### 1.2 Trace: Heapsort extraction passes
 
