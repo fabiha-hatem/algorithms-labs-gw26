@@ -338,8 +338,12 @@ python3 bst_practice.py
 **TODO 2.4A:** In a two-child deletion (Case 3), why is the in-order successor
 guaranteed never to have a left child?
 
+The in-order successor is guaranteed to never have a left child because the tree’s minimum is found by z.right which goes until left.node is at None, this means that the returned node has no left child. 
+
 **TODO 2.4B:** When deleting the root node of the tree, what special pointer
 updates must take place regarding `tree.root` and `node.parent`?
+
+You need transpant to check that the u.parent is None, if its true then tree.root = v and then v.parent = None. 
 
 All three basic BST operations (search, insert, delete) run in $O(h)$ time,
 where $h$ is the height of the tree. The iterative implementations require
