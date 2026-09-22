@@ -180,9 +180,13 @@ python3 heap_practice.py
 repeatedly extracting the root to the end of the array, whereas using a Min-Heap
 produces a descending sort?
 
+Max heap produces ascending order because each time a number is extracted it removes from the root and puts it at the end of the unsorted part of the array, in max heap that root is always the largest element that is left. So if you repeatedly put the largest number last, that is going to be from least to greatest, which is ascending. Min heap is descending because the root is always the smallest element that is left, so if you keep putting the smallest at the end, they end up last, which means descending order.
+
 **TODO 1.4B:** Bottom-up heap construction (`build_max_heap`) takes $O(n)$ time,
 yet `heap_sort` overall requires $O(n \log n)$ time. Where does the additional
 time come from during the sorting phase?
+
+The additional time comes from having to repeatedly sift down, once per extraction. 
 
 Building a heap takes $\Theta(n)$ time. Each of the $n - 1$ extractions performs
 at most $O(\log n)$ sift-down work, yielding $\Theta(n \log n)$ total time and
