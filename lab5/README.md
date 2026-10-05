@@ -98,11 +98,11 @@ have a different height, creating imbalances higher up.
 
 **TODO 1.1:** Briefly recall the three deletion cases from Lab 3/4:
 - What happens when the target node has 0 children?
-- You disconnect z from its parent. 
+You disconnect z from its parent. 
 - What happens when the target node has 1 child?
-- You bypass z by connecting z's parent directly to z's sole child. 
+You bypass z by connecting z's parent directly to z's sole child. 
 - What happens when the target node has 2 children, and why is the in-order successor used?
-- You locate z's in order successor y and replace z and y. If y is not z's immediate right child y's own right child is spliced y's former position before y takes z's place. In order successor's are used because it preserved the sorted search property across the entire tree. 
+You locate z's in order successor y and replace z and y. If y is not z's immediate right child y's own right child is spliced y's former position before y takes z's place. In order successor's are used because it preserved the sorted search property across the entire tree. 
 
 ### 1.2 Short answer: Height change after deletion
 
@@ -110,8 +110,9 @@ have a different height, creating imbalances higher up.
 - Does the leaf's parent's height change? By how much?
 It does change because the height of the parent depends on the root.
 - Can the grandparent's height change?
+Yes because if the parent's height is able to change the grandparent's height can change to. 
 - Can the imbalance propagate to the root?
-
+Yes it can cascade. 
 ---
 
 ## Part 2: AVL Deletion Traces
@@ -135,11 +136,27 @@ Start with this AVL tree:
 **TODO 2.1:** Delete key `40` from this tree. Trace the rebalancing:
 
 1. Perform BST deletion of 40 (it's a leaf). What is the tree after deletion?
+30 -> 20 -> 10
 2. Rebalance from the parent of the deleted node (30).
+```
+      20
+     /  \
+   10    30
+   
+```
 3. What is the balance factor at 30?
++2 
 4. Identify the violation signature (LL, RR, LR, or RL) and the required rotation.
+left left violation 
 5. After rotation, is the tree still imbalanced? If so, continue rebalancing.
+The tree is now balanced. 
 6. Draw the final tree and record the in-order traversal.
+```
+      20
+     /  \
+   10    30
+   
+```
 
 | Step | Action | Tree state | Unbalanced node | BF | Signature | Rotation | Notes |
 |---|---|---|---|---|---|---|---|
