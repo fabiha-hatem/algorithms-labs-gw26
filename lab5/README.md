@@ -98,11 +98,11 @@ have a different height, creating imbalances higher up.
 
 **TODO 1.1:** Briefly recall the three deletion cases from Lab 3/4:
 - What happens when the target node has 0 children?
-You disconnect z from its parent. 
+- You disconnect z from its parent. 
 - What happens when the target node has 1 child?
-You bypass z by connecting z's parent directly to z's sole child. 
+- You bypass z by connecting z's parent directly to z's sole child. 
 - What happens when the target node has 2 children, and why is the in-order successor used?
-You locate z's in order successor y and replace z and y. If y is not z's immediate right child y's own right child is spliced y's former position before y takes z's place. In order successor's are used because it preserved the sorted search property across the entire tree. 
+- You locate z's in order successor y and replace z and y. If y is not z's immediate right child y's own right child is spliced y's former position before y takes z's place. In order successor's are used because it preserved the sorted search property across the entire tree. 
 
 ### 1.2 Short answer: Height change after deletion
 
