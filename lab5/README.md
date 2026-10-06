@@ -161,8 +161,8 @@ The tree is now balanced.
 | Step | Action | Tree state | Unbalanced node | BF | Signature | Rotation | Notes |
 |---|---|---|---|---|---|---|---|
 | 1 | Delete 40 | 40 is removed (leaf) | - | - | - | - | Tree now has 30 root, 20 left, nothing right |
-| 2 | Rebalance from 30 | TODO | TODO | TODO | TODO | TODO | TODO |
-| 3 | After rotation | TODO | TODO | TODO | - | - | Final state |
+| 2 | Rebalance from 30 | 30, 20, 10 all left | 30 | +2 | Left Left | single right rotation at 30 | its like a left linked list |
+| 3 | After rotation | root is 20, left is 10, right is 30 | - | 0 | - | - | Final state |
 
 ### 2.2 Trace: Double rotation after deletion
 
@@ -179,15 +179,32 @@ Start with this AVL tree:
 **TODO 2.2:** Delete key `40` from this tree. Trace the rebalancing:
 
 1. Perform BST deletion of 40 (it's a leaf).
+```
+      30
+     /  
+   10    
+    \
+    20
+```
 2. Rebalance from the parent of the deleted node (30).
+```
+      30
+     /  
+   10    
+    \
+    20
+```
 3. What is the balance factor at 30 after 40 is deleted?
++2
 4. Identify the violation signature. Is node 10 left-heavy or right-heavy?
+Left right violation, it will we left heavy. 
 5. Which rotation(s) are needed (single or double)?
-6. Draw the final tree and record the in-order traversal.
+Double rotation
+7. Draw the final tree and record the in-order traversal.
 
 | Step | Action | Current node | BF before | Signature | Rotation applied | BF after |
 |---|---|---|---|---|---|---|
-| 1 | Delete 40 | 30 | TODO | TODO | TODO | TODO |
+| 1 | Delete 40 | 30 | +2 | left right| left rotate at 10 | 0 |
 | 2 | Verify final | - | - | - | - | - |
 
 ### 2.3 Trace: Two-child deletion with rebalancing
@@ -208,15 +225,26 @@ Start with this AVL tree:
 Trace the rebalancing:
 
 1. Find the in-order successor of 30 (minimum of right subtree: 40).
+40
 2. Perform the transplant: replace 30 with 40, move 40's children appropriately.
+```
+        50
+       /  \
+      40   70
+     /        \
+   20          80
+   /
+  10
+```
 3. Rebalance from the appropriate starting node (the parent of where 40 was removed).
 4. At each step, identify any violation and apply the necessary rotation.
+left left
 5. Continue until no more imbalances exist.
 
 | Step | Current node | BF | Imbalanced? | Violation | Rotation applied |
 |---|---|---|---|---|---|
-| 1 | (after replacing 30 with 40) | TODO | TODO | TODO | TODO |
-| 2 | (if needed, continue up) | TODO | TODO | TODO | TODO |
+| 1 | (after replacing 30 with 40) | +2 | yes | left left | right rotation at 40 |
+| 2 | (if needed, continue up) | 0 | no | - | -|
 
 ---
 
