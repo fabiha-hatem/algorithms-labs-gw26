@@ -84,9 +84,9 @@ occurs. Record where $j$ stops and whether you add $s$ to the results.
 | Shift `s` | Text indices checked | Final `j` | Append `s`? |
 |---|---|---|---|
 | 1 | `1` | 0 | No |
-| 2 | TODO | TODO | TODO |
-| 4 | TODO | TODO | TODO |
-| 5 | TODO | TODO | TODO |
+| 2 | `2,3`| 1 | No|
+| 4 | `4,5` | 1 | No |
+| 5 | `5,6,7` | 3 | Yes |
 
 ### 1.2 Implementation
 
@@ -174,9 +174,14 @@ At shift `6`, the hash is `7`; all five characters match, so record `6`.
 1. **Move from shift `6` to `7`.** Which digit leaves the window, and which
    digit enters? Substitute them into the rolling-hash formula and calculate
    the new hash.
+
+Digit 3 leaves the window and digit 2 enters the window. When substituting them into the rolling-hash formula it is 10*(7-3*3)+2 which is -18, -18 % 13 = 8 for the new hash. 
+
 2. **Check shift `12`.** Its hash is `7`, so compare the characters. List the
    text and pattern indices checked before stopping. Is this a match or a
    spurious hit?
+
+T[12...16]= 67399 and 67399 % 13 is 7, the hash is p=7. Then j=0 which is the charcter 6 and p[0] is character 3. It is not a match therefore it is a spurious hit. 
 
 ### 2.2 Implementation
 
@@ -196,15 +201,20 @@ spent building the first hashes. Assume $1 \le m \le n$ and that each hash
 operation takes constant time.
 
 - **Best case:** Every window hash differs from the pattern hash.
+
+For best case no window's hash matches, therefore no windows get character checks and no characters are compared. 
+
 - **Worst case:** The text is $n$ copies of `a`, and the pattern is $m$ copies of `a`.
+
+For the worst case all n-m+1 windows are hit so each cjeck is being compared to all m characters. 
 
 Give tight bounds in terms of $n$ and $m$. The search column includes both
 hash comparisons and character checks.
 
 | Case | Build hashes | Search | Total |
 |---|---|---|---|
-| Best | TODO | TODO | TODO |
-| Worst | TODO | TODO | TODO |
+| Best | O(m) | O(n-m+1) | O(n) |
+| Worst | O(m) | O((n-m+1)*m)| O((n-m+1)*m) |
 
 For each case, explain in one sentence how many windows need character checks
 and how many characters are checked in each one.
@@ -301,11 +311,17 @@ The first row is worked: `P[2] == P[4]`, so `k` increases to `3`.
 | Index `j` | Starting `k` | Fallbacks | `pi[j]` |
 |---|---|---|---|
 | 4 | 2 | none | 3 |
-| 5 | 3 | TODO | TODO |
-| 6 | 0 | TODO | TODO |
+| 5 | 3 | 3 ->1 ->0 | 0 |
+| 6 | 0 | none | 1 |
 
 Now trace the matcher at `i = 8`, starting with `q = 6`. Which pattern index
-is compared with `T[8]`? What shift is recorded, and what is `q` afterward?
+is compared with `T[8]`?
+
+The pattern index being compared is P[q]=P[6] which is a with T[8]'s a. 
+ 
+ What shift is recorded, and what is `q` afterward?
+ They match so the shift of i - m + 1 which ish 8-7+1 =2.
+ Q afterward is 1. 
 
 ### 3.2 Implementation
 
@@ -330,13 +346,24 @@ Give tight bounds in terms of $n$ and $m$.
 
 | Case | Build `pi` | Search | Total |
 |---|---|---|---|
-| Best | TODO | TODO | TODO |
-| Worst | TODO | TODO | TODO |
+| Best | O(m) | O(n) | O(n+m) = O(n) |
+| Worst | O(m) | O(n) | O(n+m) = O(n) |
 
-Explain the worst-case bound in a few lines. Across the whole scan, how often
-can `q` increase? How does that limit the number of fallbacks? Use the same
+Explain the worst-case bound in a few lines. 
+
+The best case is that building pi takes O(m) because every k extends on every step. For search q stays 0 so each of the comparisons even the fails take linear time so the best case is O(n+m) = O(n). 
+
+The worst case is that it goes to 3 and finds out that ther is no match and the charch is at the very end of the pattern. This is linear time and there will be a constant number of fall backs so the total is also O(n+m) = O(n). 
+
+Across the whole scan, how often
+can `q` increase? 
+
+The most it will increase is n times, one per character. 
+
+How does that limit the number of fallbacks? Use the same
 reasoning for `k` when building `pi`.
 
+All the fallback lowers q by at least 1 and q will never go below 0. For k when building pi it also increase at most oncer per j with each fallback lowing to at least 1. 
 ---
 
 ## Final check
