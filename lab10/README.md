@@ -117,14 +117,19 @@ using its two endpoint labels.
 
 | Vertex removed | Edge added | `key[D]` | `key[E]` |
 |---|---|---|---|
-| `B` | TODO | TODO | TODO |
-| `C` | TODO | TODO | TODO |
-| `D` | TODO | TODO | TODO |
+| `B` | A-B | 4 | infinity |
+| `C` | B-C | 4 | 6 |
+| `D` | B-D | 4 | 6 |
 
 1. Which vertex becomes `C`'s parent, and what causes the change? 
 
+B becomes C's parent because when B is removed its edge is B-C with a weight of one and C is still there with the edge A-C with a weight of 3, because 3 < 1 C's parent is updated to B. 
+
 
 2. After removing `E`, what are the tree's four edges and total weight? 
+
+The 4 edges are A-B, B-C, B-D, C-E for a total weight of 13. 
+
 
 
 
@@ -199,14 +204,16 @@ after each check, including checks that leave them unchanged.
 
 | Edge checked | Candidate | Distance of `v` | Parent of `v` |
 |---|---|---|---|
-| `B -> C` | TODO | TODO | TODO |
-| `C -> D` | TODO | TODO | TODO |
-| `C -> E` | TODO | TODO | TODO |
-| `D -> E` | TODO | TODO | TODO |
+| `B -> C` | 3 | 3 | A |
+| `C -> D` | 8 | 6 | B |
+| `C -> E` | 9 | 9 | C |
+| `D -> E` | 13 | 9 | C |
 
 Give the final distance array and the shortest path from `A` to `E`:
 
- **TODO**
+distance array: [0, 2, 3, 6, 9]
+shortest path from `A` to `E`: A to C to E 
+ 
 
 ### 2.2 Implementation
 
@@ -223,11 +230,16 @@ undirected graphs, including graphs with unreachable vertices.
    `C`'s parent under each algorithm? What quantity does each algorithm
    minimize? 
 
+`C`'s parent under under prim's is A and minimizes the total weight of the MST . `C`'s parent under Dijkstra's is also A and minimizes the shortest distance from source A to each vertex . 
+
+
 
 2. Consider the directed edges `S -> A: 2`, `S -> B: 5`, and `B -> A: -4`.
    Starting from `S`, which distance does Dijkstra finalize too early?
    Give the actual shortest distance and explain why the negative edge
    causes a problem.
+
+Dijkstra finalizes too early at distance A. The actual shortest distance. A negative edge causes a problem because this algorthm assumes that all edge weights are not negative and so negative edge can make a shorter path for a vertex even after it has already been finalized. 
 
 
 3. Let `V` and `E` be the numbers of vertices and edges. For the provided
@@ -237,6 +249,9 @@ undirected graphs, including graphs with unreachable vertices.
    auxiliary space bounds. Exclude the input graph from space. What is
    the time bound if finding the minimum instead scans an unsorted array
    of vertices?
+
+For Prim the removals are V, and the possibe decreases is O(E), the worst case time for decrease is O(E), and the auxiliary space bounds are O(V). For Dijkstra the removals are also V, and the possibe decreases is also O(E), the worst case time for decrease is also O(E), and the auxiliary space bounds are also O(V). The time bound if finding the minimum instead scans an unsorted array of vertices is O(V^2 +E) = O(V^2)
+
 
 
 ---
